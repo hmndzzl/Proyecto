@@ -1,7 +1,5 @@
 import tkinter as tk
 
-import tkinter as tk
-
 def saludar():
     label_saludo.config(text="¡Hola, Mundo!")
 
