@@ -17,10 +17,3 @@ boton_saludar.pack()
 
 root.mainloop()
 
-#hola???? 
-
-# Prueba con live share
-
-#prueba 
-#Prueba!!!
-#Holi 
