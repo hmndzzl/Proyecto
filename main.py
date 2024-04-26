@@ -1,22 +1,10 @@
-import tkinter as tk
+#---------------------------------
+# Algoritmos y Programación Básica
+# Sección 170
+# Diego Andre Calderon Salazar - 241263
+# Hugo Roberto Méndez Lee - 241265
+# Pedro Julio Caso Tzunún - 241286
+# Marisabel Santizo Arenas - 241400
+# Arodi Josué Chávez Ramírez - 241112
+#---------------------------------
 
-def saludar():
-    label_saludo.config(text="¡Hola, Mundo!")
-
-root = tk.Tk()
-root.title("Mi Aplicación")
-root.geometry("800x500")
-
-# Etiqueta
-label_saludo = tk.Label(root, text="¡Bienvenido!")
-label_saludo.pack(pady=20)  # pady es el espacio vertical alrededor del widget
-
-# Botón
-boton_saludar = tk.Button(root, text="Saludar", command=saludar)
-boton_saludar.pack()
-
-root.mainloop()
-
-# prueba de nuevo
-# ya me sale!
-# prueba
