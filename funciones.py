@@ -34,14 +34,17 @@ def crear_usario(usuarios):
 # Función para iniciar sesión en un usuario existente
 def ingresar(usuarios):
     usuario = input("Ingrese nombre de usuario: ").upper()
-    if usuario in usuarios:
-        contraseña = input("Ingrese contraseña: ")
-        if usuarios[usuario] == contraseña:
-            print("Inicio de sesión exitoso")
+    ingreso = False
+    while ingreso == False:
+        if usuario in usuarios:
+            contraseña = input("Ingrese contraseña: ")
+            if usuarios[usuario] == contraseña:
+                print("Inicio de sesión exitoso")
+                ingreso = True
+            else:
+                print("Contraseña incorrecta")
         else:
-            print("Contraseña incorrecta")
-    else:
-        print("El usuario no existe")
+            print("El usuario no existe")
 
     return usuario
 
