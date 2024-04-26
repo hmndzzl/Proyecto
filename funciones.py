@@ -13,7 +13,7 @@ def menu(menu, opciones):
 def crear_usario(usuarios):
     usuario_valido = False
     while usuario_valido == False:
-        usuario = input("Ingrese nombre de usuario: ")
+        usuario = input("Ingrese nombre de usuario: ").upper()
         if usuario in usuarios.keys():
             print("Error el usuario ya está tomado.")
         else: 
@@ -30,7 +30,7 @@ def crear_usario(usuarios):
             usuario_valido = True
 
 def ingresar(usuarios):
-    usuario = input("Ingrese nombre de usuario: ")
+    usuario = input("Ingrese nombre de usuario: ").upper()
     if usuario in usuarios:
         contraseña = input("Ingrese contraseña: ")
         if usuarios[usuario] == contraseña:
@@ -50,7 +50,44 @@ def obtener_datos_semanales(datos):
         print(f"Datos día {dias[index]}: ph: {ph}, Temperatura: {temperatura}, Humedad: {humedad}%")
         index += 1
 
-        
-items = {"pH": [None, 2, 3, 4, 5, 6, 7], "Temperatura": [1, 2, 3, 4, 5, 6, None], "Humedad": [1, 2, None, 4, 5, 6, 7]}
-obtener_datos_semanales(items)
+def obtener_datos_hoy(datos):
+    index = 0
+    dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+    for i in range(0,7):
+        ph = datos["pH"][index]
+        temperatura = datos["Temperatura"][index]
+        humedad = datos["Humedad"][index]
+        print(f"Datos día {dias[index]}: ph: {ph}, Temperatura: {temperatura}, Humedad: {humedad}%")
+        index += 1
+
+def promedio_ph(datos):
+    suma = 0
+    total = 0
+    for i in datos["pH"]:
+        suma += i
+        total += 1
+    
+    return suma / total
+
+def promedio_temp(datos):
+    suma = 0
+    total = 0
+    for i in datos["Temperatura"]:
+        suma += i
+        total += 1
+    
+    return suma / total
+
+def promedio_humedad(datos):
+    suma = 0
+    total = 0
+    for i in datos["Humedad"]:
+        suma += i
+        total += 1
+    
+    return suma / total
+
+
+
+
 
