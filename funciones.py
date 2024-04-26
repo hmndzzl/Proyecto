@@ -33,9 +33,9 @@ def crear_usario(usuarios):
 
 # Función para iniciar sesión en un usuario existente
 def ingresar(usuarios):
-    usuario = input("Ingrese nombre de usuario: ").upper()
     ingreso = False
     while ingreso == False:
+        usuario = input("Ingrese nombre de usuario: ").upper()
         if usuario in usuarios:
             contraseña = input("Ingrese contraseña: ")
             if usuarios[usuario] == contraseña:
