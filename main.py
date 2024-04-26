@@ -17,12 +17,13 @@ menu2 = """
 1 = Obtener Base de Datos Semanal
 2 = """
 
-def menu(menu):
+# Función que imprime un menú y recibe como argumentos el string con el menú y la cantidad de opciones que tiene le menú. 
+def menu(menu, opciones):
     # Imprime menú  
     print(menu)  
     opcion = int(input("Ingrese el número de la opción que desea: "))
     # Si el usuario ingresa un valor fuera del rango aceptado:
-    while opcion not in list(range(1, 3)):
+    while opcion not in list(range(1, opciones)):
         print("Ha ingresado un valor fuera de los aceptados, vuelva a intentarlo:")
         print(menu)  
         opcion = int(input("Ingrese el número de la opción que desea: "))
@@ -33,7 +34,7 @@ def menu(menu):
 w = True
 while w:
     
-    menu(menu1)
+    opcion = menu(menu1, 2)
     
     if opcion == 1:
         print("función de iniciar sesión")
@@ -44,7 +45,7 @@ while w:
     
     # Segundo Menú: 
     t = True    
-    while t:
+   # while t:
         
         
         
