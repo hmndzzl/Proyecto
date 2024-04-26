@@ -1,5 +1,3 @@
-import datetime as dt
-
 def crear_usario(usuarios):
     usuario_valido = False
     while usuario_valido == False:
