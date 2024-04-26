@@ -32,9 +32,21 @@ def obtener_datos(datos):
     index = 0
     dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
     for i in range(0,7):
-        ph = datos["pH"][index]
-        temperatura = datos["Temperatura"][index]
-        humedad = datos["Humedad"][index]
+        try:
+            ph = datos["pH"][index]
+        except IndexError:
+            ph = "N.D"
+        try:
+            temperatura = datos["Temperatura"][index]
+        except IndexError:
+            temperatura = "N.D."
+        try:
+            humedad = datos["Humedad"][index]
+        except IndexError:
+            humedad = "N.D."
         print(f"Datos día {dias[index]}: ph: {ph}, Temperatura: {temperatura}, Humedad: {humedad}%")
         index += 1
+
         
+items = {"pH": [1, 2, 3, 4, 5, 6, 7], "Temperatura": [1, 2, 3, 4, 5, 6], "Humedad": [1, 2, 4, 5, 6, 7]}
+obtener_datos(items)
