@@ -1,4 +1,5 @@
 
+# Función que imprime un menú y recibe como argumentos el string con el menú y la cantidad de opciones que tiene le menú. 
 def menu(menu, opciones):
     # Imprime menú  
     print(menu)  
@@ -10,6 +11,7 @@ def menu(menu, opciones):
         opcion = int(input("Ingrese el número de la opción que desea: "))
     return opcion
 
+# Función para Crear un nuevo usuario
 def crear_usario(usuarios):
     usuario_valido = False
     while usuario_valido == False:
@@ -29,6 +31,7 @@ def crear_usario(usuarios):
             print(f"Usuario {usuario} creado exitosamente")
             usuario_valido = True
 
+# Función para iniciar sesión en un usuario existente
 def ingresar(usuarios):
     usuario = input("Ingrese nombre de usuario: ").upper()
     if usuario in usuarios:
@@ -40,26 +43,30 @@ def ingresar(usuarios):
     else:
         print("El usuario no existe")
 
+    return usuario
+
+# Función para obtener los datos en una semana completa 
 def obtener_datos_semanales(datos):
     index = 0
     dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
     for i in range(0,7):
-        ph = datos["pH"][index]
-        temperatura = datos["Temperatura"][index]
-        humedad = datos["Humedad"][index]
-        print(f"Datos día {dias[index]}: ph: {ph}, Temperatura: {temperatura}, Humedad: {humedad}%")
+        print(f"Datos día {dias[index]}: ph: {datos['pH'][index]}, Temperatura: {datos['Temperatura'][index]}, Humedad: {datos['Humedad'][index]}%")
         index += 1
 
-def obtener_datos_hoy(datos):
+
+# Función Para obtener los datos en un día específico de la semana
+def obtener_datos_dia(datos):
     index = 0
-    dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
-    for i in range(0,7):
-        ph = datos["pH"][index]
-        temperatura = datos["Temperatura"][index]
-        humedad = datos["Humedad"][index]
-        print(f"Datos día {dias[index]}: ph: {ph}, Temperatura: {temperatura}, Humedad: {humedad}%")
-        index += 1
+    dias = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO"]
 
+    dia = input("¿De qué día de la semana quiere saber los datos?").upper()
+
+    ph = datos["pH"][dia]
+    temperatura = datos["Temperatura"][dia]
+    humedad = datos["Humedad"][dia]
+    print(f"Datos día {dias[index].capitalize()}: ph: {ph}, Temperatura: {temperatura}, Humedad: {humedad}%")
+
+#Función para obtener el promedio del pH
 def promedio_ph(datos):
     suma = 0
     total = 0
@@ -69,6 +76,7 @@ def promedio_ph(datos):
     
     return suma / total
 
+#Función para obtener el promedio de la temperatura
 def promedio_temp(datos):
     suma = 0
     total = 0
@@ -78,6 +86,7 @@ def promedio_temp(datos):
     
     return suma / total
 
+#Función para obtener el promedio de la humedad
 def promedio_humedad(datos):
     suma = 0
     total = 0

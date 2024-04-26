@@ -17,60 +17,84 @@ menu1 = """
 
 menu2 = """
 1 = Obtener Base de Datos
-2 = Prueba
+2 = Obtener Promedio Semanal
 3 = Salir"""
 
 menu3 = """
-1 = Hoy
-2 = Semanal 
+1 = Últimos Registrados
+2 = Día específico
+3 = Semanal 
 """
+menu_promedios = """
+¿Cuál dato quiere extraer el promedio semanal?
 
-datos = {"pH": [2.3, 3.1, 3.3, 2.2, 1.5, 1.2, 2.1], "Temperatura": [20, 22, 21, 24, 26, 25, 22], "Humedad": [55, 56, 57, 68, 50, 67, 70]}
+1 = pH
+2 = Temperatura
+3 = Humedad 
+"""
 
 usuarios = {"DIEGO": "diego2843", "HUGO": "24Huguin", "PEDRO": "Elpepe24", "MARISA": "Santizo32", "ARODI": "contraseña"}
 
+datos = {
+    "DIEGO": {"pH": [2.4, 2.9, 2.3, 2.1, 2.9, 1.6, 1.9], "Temperatura": [21, 25, 25, 23, 22, 25, 25], "Humedad": [64, 65, 57, 56, 55, 66, 57]},
 
-# Función que imprime un menú y recibe como argumentos el string con el menú y la cantidad de opciones que tiene le menú. 
-def menu(menu, opciones):
-    # Imprime menú  
-    print(menu)  
-    opcion = int(input("Ingrese el número de la opción que desea: "))
-    # Si el usuario ingresa un valor fuera del rango aceptado:
-    while opcion not in list(range(1, opciones + 1)):
-        print("Ha ingresado un valor fuera de los aceptados, vuelva a intentarlo:")
-        print(menu)  
-        opcion = int(input("Ingrese el número de la opción que desea: "))
-    return opcion
+    "HUGO": {"pH": [2.6, 1.5, 2.5, 2.5, 1.9, 1.6, 1.7], "Temperatura": [21, 23, 25, 24, 21, 22, 23], "Humedad": [58, 67, 56, 64, 68, 64, 52]},
+
+    "PEDRO": {"pH": [2.1, 2.4, 1.8, 2.2, 2.7, 2.2, 1.4], "Temperatura": [25, 25, 20, 24, 24, 20, 20], "Humedad": [61, 64, 67, 59, 60, 64, 59]},
+
+    "MARISA": {"pH": [1.5, 2.7, 1.7, 2.7, 2.5, 2.8, 2.4], "Temperatura": [21, 24, 23, 22, 22, 23, 25], "Humedad": [53, 64, 53, 62, 66, 60, 60]},
+
+    "ARODI": {"pH": [1.9, 2.6, 2.5, 2.2, 2.9, 2.1, 2.9], "Temperatura": [25, 23, 20, 23, 23, 21, 24], "Humedad": [64, 53, 57, 63, 60, 52, 59]}
+}
 
 
 # Menú 1: Inicio de Sesión
-opcion = menu(menu1, 2)
+opcion = f.menu(menu1, 2)
 
 if opcion == 1:
-    f.ingresar(usuarios)
+    usuario = f.ingresar(usuarios)
     
 if opcion == 2:
-    print("función de crear una cuenta")
-    print("función para iniciar sesión")
+    f.crear_usario(usuarios)
+    usuario = f.ingresar(usuarios).upper()
+    datos[usuario] = {"pH": [0, 0, 0, 0, 0, 0, 0], "Temperatura": [0, 0, 0, 0, 0, 0, 0], "Humedad": [0, 0, 0, 0, 0, 0, 0]}
 
 # Segundo Menú: 
 w = True
 while w:
-    opcion = menu(menu2, 3)
+    opcion = f.menu(menu2, 3)
     
     if opcion == 1:
         print("obtener base de datos")
-        opcion2 = menu(menu3, 2)
+        opcion2 = f.menu(menu3, 3)
 
-        # Datos de hoy
+        # Últimos datos registrados
         if opcion2 == 1:
-            print(datos[-1])
+            print(f"Últimos datos registrados: ph: {datos[usuario]['pH'][-1]}, Temperatura: {datos[usuario]['Temperatura'][-1]}, Humedad: {datos[usuario]['Humedad'][-1]}%")
 
         if opcion2 == 2:
-            f.obtener_datos_semanales(datos)
+            f.obtener_datos_dia(datos[usuario])
+
+        if opcion2 == 3:
+            f.obtener_datos_semanales(datos[usuario])
         
     if opcion == 2: 
-        print("prueba prueba")
+        opcion3 = f.menu(menu_promedios, 3)
+
+        # Si el usuario escoge pH 
+        if opcion3 == 1:
+            prom_ph = f.promedio_ph(datos[usuario])
+            print(f"El promedio de pH semanal es de: {prom_ph}")
+
+        # Si el usuario escoge temperatura
+        if opcion3 == 2:
+            prom_temp = f.promedio_temp(datos[usuario])
+            print(f"El promedio de temperaturas semanales es de: {prom_temp} grados centígrados")
+
+        # Si el usuario escoge humedad
+        if opcion3 == 3:
+            prom_hum = f.promedio_humedad(datos[usuario])
+            print(f"El promedio de porcentaje de humedad semanal es de: {prom_hum}%")
         
     if opcion == 3:
         print("Saliendo...")
