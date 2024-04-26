@@ -1,3 +1,15 @@
+
+def menu(menu, opciones):
+    # Imprime menú  
+    print(menu)  
+    opcion = int(input("Ingrese el número de la opción que desea: "))
+    # Si el usuario ingresa un valor fuera del rango aceptado:
+    while opcion not in list(range(1, opciones + 1)):
+        print("Ha ingresado un valor fuera de los aceptados, vuelva a intentarlo:")
+        print(menu)  
+        opcion = int(input("Ingrese el número de la opción que desea: "))
+    return opcion
+
 def crear_usario(usuarios):
     usuario_valido = False
     while usuario_valido == False:
@@ -28,25 +40,17 @@ def ingresar(usuarios):
     else:
         print("El usuario no existe")
 
-def obtener_datos(datos):
+def obtener_datos_semanales(datos):
     index = 0
     dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
     for i in range(0,7):
-        try:
-            ph = datos["pH"][index]
-        except IndexError:
-            ph = "N.D"
-        try:
-            temperatura = datos["Temperatura"][index]
-        except IndexError:
-            temperatura = "N.D."
-        try:
-            humedad = datos["Humedad"][index]
-        except IndexError:
-            humedad = "N.D."
+        ph = datos["pH"][index]
+        temperatura = datos["Temperatura"][index]
+        humedad = datos["Humedad"][index]
         print(f"Datos día {dias[index]}: ph: {ph}, Temperatura: {temperatura}, Humedad: {humedad}%")
         index += 1
 
         
-items = {"pH": [1, 2, 3, 4, 5, 6, 7], "Temperatura": [1, 2, 3, 4, 5, 6], "Humedad": [1, 2, 4, 5, 6, 7]}
-obtener_datos(items)
+items = {"pH": [None, 2, 3, 4, 5, 6, 7], "Temperatura": [1, 2, 3, 4, 5, 6, None], "Humedad": [1, 2, None, 4, 5, 6, 7]}
+obtener_datos_semanales(items)
+
