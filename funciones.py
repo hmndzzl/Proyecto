@@ -59,14 +59,15 @@ def obtener_datos_semanales(datos):
 
 # Función Para obtener los datos en un día específico de la semana
 def obtener_datos_dia(datos):
-    index = 0
     dias = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO"]
 
-    dia = input("¿De qué día de la semana quiere saber los datos?").upper()
+    dia = input("¿De qué día de la semana quiere saber los datos? ").upper()
 
-    ph = datos["pH"][dia]
-    temperatura = datos["Temperatura"][dia]
-    humedad = datos["Humedad"][dia]
+    index = dias.index(dia)
+    
+    ph = datos["pH"][index]
+    temperatura = datos["Temperatura"][index]
+    humedad = datos["Humedad"][index]
     print(f"Datos día {dias[index].capitalize()}: ph: {ph}, Temperatura: {temperatura}, Humedad: {humedad}%")
 
 #Función para obtener el promedio del pH
