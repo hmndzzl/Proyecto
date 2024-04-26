@@ -8,7 +8,7 @@
 # Arodi Josué Chávez Ramírez - 241112
 #---------------------------------
 
-import funciones as f
+import funciones as f #Importar las funciones
 
 # Variables
 menu1 = """
