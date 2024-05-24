@@ -1,15 +1,23 @@
 
 # Función que imprime un menú y recibe como argumentos el string con el menú y la cantidad de opciones que tiene le menú. 
 def menu(menu, opciones):
-    # Imprime menú  
-    print(menu)  
-    opcion = int(input("Ingrese el número de la opción que desea: "))
-    # Si el usuario ingresa un valor fuera del rango aceptado:
-    while opcion not in list(range(1, opciones + 1)):
-        print("Ha ingresado un valor fuera de los aceptados, vuelva a intentarlo:")
+    control = False
+    while control == False:
+        # Imprime menú  
         print(menu)  
-        opcion = int(input("Ingrese el número de la opción que desea: "))
-    return opcion
+        opcion = input("Ingrese el número de la opción que desea: ")
+        # Si el usuario ingresa un valor fuera del rango aceptado:
+        try : 
+            int(opcion)
+        except ValueError:
+            print("Error, ingrese una opción válida. ")
+        else:
+            while opcion not in list(range(1, opciones + 1)):
+                print("Ha ingresado un valor fuera de los aceptados, vuelva a intentarlo:")
+                print(menu)  
+                opcion = int(input("Ingrese el número de la opción que desea: "))
+                control = True
+            return opcion
 
 # Función para Crear un nuevo usuario
 def crear_usario(usuarios):
