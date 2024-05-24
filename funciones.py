@@ -52,9 +52,18 @@ def ingresar(usuarios):
             else:
                 print("Contraseña incorrecta")
         else:
-            print("El usuario no existe")
+            w = False
+            while w == False:
+                print("El usuario no existe")
+                opcion = input("¿Desea crear un nuevo usuario? (sí/no): ").lower()
+                if opcion == 'sí' or opcion == 'si':
+                    crear_usario(usuarios)
+                    w = True
+                else:
+                    print("Por favor, intente de nuevo.")
+                    w = True
 
-    return usuario
+        return usuario
 
 # Función para obtener los datos en una semana completa 
 def obtener_datos_semanales(datos):
