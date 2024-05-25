@@ -1,23 +1,46 @@
 
 # Función que imprime un menú y recibe como argumentos el string con el menú y la cantidad de opciones que tiene le menú. 
-def menu(menu, opciones):
-    control = False
-    while control == False:
-        # Imprime menú  
-        print(menu)  
+def menu(menu_text, opciones):
+    while True:
+        # Imprime el menú
+        print(menu_text)
         opcion = input("Ingrese el número de la opción que desea: ")
-        # Si el usuario ingresa un valor fuera del rango aceptado:
-        try : 
-            int(opcion)
+        
+        # Verifica si la opción ingresada es un número válido
+        try:
+            opcion = int(opcion)
+            if 1 <= opcion <= opciones:
+                return opcion
+            else:
+                print(f"Error, ingrese un número entre 1 y {opciones}.")
         except ValueError:
-            print("Error, ingrese una opción válida. ")
-        else:
-            while opcion not in list(range(1, opciones + 1)):
-                print("Ha ingresado un valor fuera de los aceptados, vuelva a intentarlo:")
-                print(menu)  
-                opcion = int(input("Ingrese el número de la opción que desea: "))
-                control = True
-            return opcion
+            print("Error, ingrese un número válido.")
+
+def ingresar_datos(datos):
+    valido = False
+    print("¿Desea agregar datos? Si: 1 | No: 2")
+    
+    while valido == False:
+        dato = {}
+        agregar_datos = input("Ingrese el número de opción: ")
+        if agregar_datos == "1":
+            ph = input("Ingrese el pH; ")
+            dato["pH"] = ph
+            temperatura = input("Ingrese temperatura: ")
+            dato["Temperatura"] = temperatura
+            humedad = input("Ingrese la humedad: ")
+            dato["Humedad"] = humedad
+
+            valido = True
+
+        elif agregar_datos == "2":
+            print("Se añadiran datos por defecto.")
+
+            valido = True
+
+        else: 
+            print("Error, ingrese una opción válida")         
+
 
 # Función para Crear un nuevo usuario
 def crear_usario(usuarios):
@@ -59,11 +82,14 @@ def ingresar(usuarios):
                 if opcion == 'sí' or opcion == 'si':
                     crear_usario(usuarios)
                     w = True
+                    return usuario
                 else:
-                    print("Por favor, intente de nuevo.")
+                    print("Error, el programa terminará debido a que no se pudo validar el usuario.")
                     w = True
+                ingreso = True
+                    
 
-        return usuario
+        
 
 # Función para obtener los datos en una semana completa 
 def obtener_datos_semanales(datos):
