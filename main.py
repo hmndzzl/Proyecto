@@ -9,6 +9,7 @@
 #---------------------------------
 
 import funciones as f #Importar las funciones
+import pandas as pd # Importar la librería de pandas
 
 # Variables
 menu1 = """
