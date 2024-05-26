@@ -64,8 +64,6 @@ if opcion == 2:
     usuario = f.ingresar(usuarios,datos)
     if not usuario:
         exit()
-    print(datos)
-
 
 # Segundo Menú: 
 w = True
@@ -107,9 +105,28 @@ while w:
     if opcion == 3:
         print("Saliendo...")
         w = False
-    
-        
-        
-        
+
+#Guardar datos en un  CSV
+filas = []
+dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+
+for usuario, valores in datos.items():
+    for i in range(7):
+        fila = {
+            'Usuario': usuario,
+            'Contraseña': usuarios[usuario],
+            'Día': dias[i],
+            'pH': valores['pH'][i],
+            'Temperatura': valores['Temperatura'][i],
+            'Humedad': valores['Humedad'][i]
+        }
+        filas.append(fila)
+
+# Crear el DataFrame
+df = pd.DataFrame(filas)
+
+# Guardar el DataFrame en un archivo CSV
+df.to_csv('datos_usuarios.csv', index=False)
+
     
     
