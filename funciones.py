@@ -92,8 +92,7 @@ def ingresar(usuarios, datos):
                 else:
                     print("Error, el programa terminará debido a que no se pudo validar el usuario.")
                     w = True
-                ingreso = True
-                         
+                ingreso = True              
 
 # Función para obtener los datos en una semana completa 
 def obtener_datos_semanales(datos):
