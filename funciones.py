@@ -20,29 +20,45 @@ def ingresar_datos():
     valido = False
     print("¿Desea agregar datos? Si: 1 | No: 2")
     
-    while valido == False:
+    while not valido:
         dato = {}
+        dato["pH"] = []
+        dato["Temperatura"] = []
+        dato["Humedad"] = []
         agregar_datos = input("Ingrese el número de opción: ")
+        
         if agregar_datos == "1":
-            ph = input("Ingrese el pH: ")
-            dato["pH"] = ph
-            temperatura = input("Ingrese temperatura: ")
-            dato["Temperatura"] = temperatura
-            humedad = input("Ingrese la humedad: ")
-            dato["Humedad"] = humedad
+            dias_semana = {1: "lunes", 2: "martes", 3: "miércoles", 4: "jueves", 5: "viernes", 6: "sábado", 7: "domingo"}
+            for i in dias_semana:
+                print(f"Ingrese el pH del día: {dias_semana[i]}")
+                ph = input("Ingrese el valor: ")
+                print(f"Ingrese la temperatura del día: {dias_semana[i]}")
+                temperatura = input("Ingrese el valor: ")
+                print(f"Ingrese la humedad del día: {dias_semana[i]}")
+                humedad = input("Ingrese el valor: ")
+                try: 
+                    ph = float(ph)
+                    temperatura = float(temperatura)
+                    humedad = float(humedad)
+                    
+                    dato["pH"].append(ph)
+                    dato["Temperatura"].append(temperatura)
+                    dato["Humedad"].append(humedad)
+                    valido = True
 
-            valido = True
+                except ValueError:
+                    print("Error, ingrese valores numéricos válidos para pH, temperatura y humedad.")
 
         elif agregar_datos == "2":
-            print("Se añadiran datos por defecto.")
+            print("Se añadirán datos por defecto.")
             dato = {"pH": [0, 0, 0, 0, 0, 0, 0], "Temperatura": [0, 0, 0, 0, 0, 0, 0], "Humedad": [0, 0, 0, 0, 0, 0, 0]}
-
             valido = True
 
         else: 
             print("Error, ingrese una opción válida") 
-        
-        return dato   
+
+    return dato
+
 
 
 # Función para Crear un nuevo usuario
