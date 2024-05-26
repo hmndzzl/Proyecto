@@ -9,6 +9,9 @@
 #---------------------------------
 
 import funciones as f #Importar las funciones
+import pandas as pd # Importar la librería de pandas
+
+print("HOLAAAAAAAAAAAAAAA PRUEBA ")
 
 # Variables
 menu1 = """
@@ -51,8 +54,13 @@ datos = {
 # Menú 1: Inicio de Sesión
 opcion = f.menu(menu1, 2)
 
+<<<<<<< HEAD
 if opcion == 1:
     usuario = f.ingresar(usuarios, datos)
+=======
+if opcion == 1: # Reparar
+    usuario = f.ingresar(usuarios)
+>>>>>>> ac420ffe71a59555d370bea9a3a4123d2e23cb28
     if not usuario:
         exit()
 
