@@ -61,11 +61,11 @@ def ingresar_datos():
 
 
 # Función para Crear un nuevo usuario
-def crear_usario(usuarios, datos):
+def crear_usario(usuarios_df, usuarios, datos):
     usuario_valido = False
     while usuario_valido == False:
         usuario = input("Ingrese nombre de usuario: ").upper()
-        if usuario in usuarios.keys():
+        if (usuarios_df['Usuario'] == usuario).any():  # Retorna True si el usuario existe en el DataFrame 
             print("Error el usuario ya está tomado.")
         else: 
             contraseña_valida = False
@@ -81,15 +81,16 @@ def crear_usario(usuarios, datos):
             datos[usuario] = añadir
             print(f"Usuario {usuario} creado exitosamente")
             usuario_valido = True
+    return usuario
 
 # Función para iniciar sesión en un usuario existente
-def ingresar(usuarios, datos):
+def ingresar(usuarios_df, usuarios, datos):
     ingreso = False
     while ingreso == False:
         usuario = input("Ingrese nombre de usuario: ").upper()
-        if usuario in usuarios:
+        if (usuarios_df['Usuario'] == usuario).any():  # Retorna True si el usuario existe en el DataFrame 
             contraseña = input("Ingrese contraseña: ")
-            if usuarios[usuario] == contraseña:
+            if contraseña == usuarios_df.loc[usuarios_df['Usuario'] == usuario, 'Contraseña'].values[0]:
                 print("Inicio de sesión exitoso")
                 ingreso = True
                 return usuario
@@ -101,7 +102,7 @@ def ingresar(usuarios, datos):
                 print("El usuario no existe")
                 opcion = input("¿Desea crear un nuevo usuario? (sí/no): ").lower()
                 if opcion == 'sí' or opcion == 'si':
-                    crear_usario(usuarios, datos)
+                    crear_usario(usuarios_df, usuarios, datos)
                     w = True
                     return usuario
                 else:
@@ -160,3 +161,4 @@ def promedio_humedad(datos):
         total += 1
     
     return suma / total
+

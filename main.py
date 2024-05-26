@@ -1,3 +1,4 @@
+
 # ---------------------------------
 # Algoritmos y Programación Básica
 # Sección 170
@@ -11,7 +12,7 @@
 from datetime import datetime
 import copy as cp
 import pandas as pd 
-import funciones as f
+import funciones_prueba as f
 
 # Variables
 menu1 = """
@@ -69,14 +70,13 @@ except (FileNotFoundError, pd.errors.EmptyDataError):
 opcion = f.menu(menu1, 2)
 
 if opcion == 1:
-    usuario = f.ingresar(usuarios, datos)
+    usuario = f.ingresar(usuarios_df, usuarios, datos)
     if not usuario:
         exit()
 
     
 if opcion == 2:
-    f.crear_usario(usuarios, datos)
-    usuario = f.ingresar(usuarios,datos)
+    usuario = f.crear_usario(usuarios_df, usuarios, datos)
     if not usuario:
         exit()
 
@@ -180,4 +180,4 @@ while w:
         datos_df.to_csv('datos.csv', index=False)
         
         w = False
-        
+    
