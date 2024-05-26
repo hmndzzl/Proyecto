@@ -72,7 +72,6 @@ def ingresar(usuarios):
             if usuarios[usuario] == contraseña:
                 print("Inicio de sesión exitoso")
                 ingreso = True
-                return True
             else:
                 print("Contraseña incorrecta")
         else:
