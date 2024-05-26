@@ -15,7 +15,6 @@ def menu(menu_text, opciones):
         except ValueError:
             print("Error, ingrese un número válido.")
 
-#Función para ingresar datos a un usuario nuevo
 def ingresar_datos():
     valido = False
     print("¿Desea agregar datos? Si: 1 | No: 2")
@@ -58,6 +57,8 @@ def ingresar_datos():
             print("Error, ingrese una opción válida") 
 
     return dato
+
+
 
 # Función para Crear un nuevo usuario
 def crear_usario(usuarios, datos):
@@ -159,8 +160,3 @@ def promedio_humedad(datos):
         total += 1
     
     return suma / total
-
-
-
-
-

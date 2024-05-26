@@ -1,4 +1,4 @@
-#---------------------------------
+# ---------------------------------
 # Algoritmos y Programación Básica
 # Sección 170
 # Diego Andre Calderon Salazar - 241263
@@ -6,11 +6,12 @@
 # Pedro Julio Caso Tzunún - 241286
 # Marisabel Santizo Arenas - 241400
 # Arodi Josué Chávez Ramírez - 241112
-#---------------------------------
+# ---------------------------------
 
-import funciones as f #Importar las funciones
-import pandas as pd # Importar la librería de pandas
-
+from datetime import datetime
+import copy as cp
+import pandas as pd 
+import funciones as f
 
 # Variables
 menu1 = """
@@ -49,6 +50,20 @@ datos = {
     "ARODI": {"pH": [1.9, 2.6, 2.5, 2.2, 2.9, 2.1, 2.9], "Temperatura": [25, 23, 20, 23, 23, 21, 24], "Humedad": [64, 53, 57, 63, 60, 52, 59]}
 }
 
+datos_predeterminados = cp.copy(datos)
+
+usuarios_predeterminados = cp.copy(usuarios)
+
+# Intentar leer los archivos CSV, si no existen, crear DataFrames vacíos con las columnas
+try:
+    datos_df = pd.read_csv("datos.csv")
+except (FileNotFoundError, pd.errors.EmptyDataError):
+    datos_df = pd.DataFrame(columns=["Usuario", "Día", "pH", "Temperatura", "Humedad", "Fecha"])
+
+try:
+    usuarios_df = pd.read_csv("usuarios.csv")
+except (FileNotFoundError, pd.errors.EmptyDataError):
+    usuarios_df = pd.DataFrame(columns=["Usuario", "Contraseña"])
 
 # Menú 1: Inicio de Sesión
 opcion = f.menu(menu1, 2)
@@ -64,6 +79,7 @@ if opcion == 2:
     usuario = f.ingresar(usuarios,datos)
     if not usuario:
         exit()
+
 
 # Segundo Menú: 
 w = True
@@ -104,6 +120,64 @@ while w:
         
     if opcion == 3:
         print("Saliendo...")
-        w = False
 
-    
+        # Solo los datos nuevos se agregarán al CSV
+        datos_nuevos = {}
+        for key, value in datos.items():
+            if key not in datos_predeterminados or datos_predeterminados[key] != value:
+                datos_nuevos[key] = value
+        
+        # Solo los usuarios nuevos se agregarán al CSV
+        usuarios_nuevos = {}        
+        for key, value in usuarios.items():
+            if key not in usuarios_predeterminados or usuarios_predeterminados[key] != value:
+                usuarios_nuevos[key] = value
+
+        # Crear listas para almacenar los datos
+        usuarios_list = []
+        contraseñas_list = []
+        dias_list = []
+        ph_list = []
+        temperatura_list = []
+        humedad_list = []
+        fecha_list = []
+
+        # Obtener la fecha actual del sistema
+        fecha_actual = datetime.now().strftime('%Y-%m-%d')
+
+        # Recorrer el diccionario de datos y agregar los datos a las listas
+        for usuario, mediciones in datos_nuevos.items():
+            for dia, medicion_ph, medicion_temperatura, medicion_humedad in zip(['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'], mediciones['pH'], mediciones['Temperatura'], mediciones['Humedad']):
+                dias_list.append(dia)
+                ph_list.append(medicion_ph)
+                temperatura_list.append(medicion_temperatura)
+                humedad_list.append(medicion_humedad)
+                fecha_list.append(fecha_actual)
+                usuarios_list.append(usuario)
+                
+        # Crear DataFrame con los nuevos usuarios
+        nuevos_usuarios_df = pd.DataFrame({
+            'Usuario': list(usuarios_nuevos.keys()),
+            'Contraseña': list(usuarios_nuevos.values())
+        })
+
+        # Crear DataFrame con los nuevos datos y mediciones
+        nuevos_datos_df = pd.DataFrame({
+            'Usuario': usuarios_list,
+            'Fecha': fecha_list,
+            'Día': dias_list,
+            'pH': ph_list,
+            'Temperatura': temperatura_list,
+            'Humedad': humedad_list
+        })
+        
+        # Concatenar ambos DataFrames 
+        usuarios_df = pd.concat([usuarios_df, nuevos_usuarios_df], ignore_index=True)
+        datos_df = pd.concat([datos_df, nuevos_datos_df], ignore_index=True)
+
+        # Guardar los DataFrames actualizados de vuelta a los CSV
+        usuarios_df.to_csv('usuarios.csv', index=False)
+        datos_df.to_csv('datos.csv', index=False)
+        
+        w = False
+        
