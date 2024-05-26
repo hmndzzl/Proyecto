@@ -52,15 +52,17 @@ datos = {
 opcion = f.menu(menu1, 2)
 
 if opcion == 1:
-    usuario = f.ingresar(usuarios)
+    usuario = f.ingresar(usuarios, datos)
     if not usuario:
         exit()
 
     
 if opcion == 2:
-    f.crear_usario(usuarios)
-    usuario = f.ingresar(usuarios).upper()
-    datos[usuario] = {"pH": [0, 0, 0, 0, 0, 0, 0], "Temperatura": [0, 0, 0, 0, 0, 0, 0], "Humedad": [0, 0, 0, 0, 0, 0, 0]}
+    f.crear_usario(usuarios, datos)
+    usuario = f.ingresar(usuarios,datos)
+    if not usuario:
+        exit()
+    print(datos)
 
 
 # Segundo Menú: 

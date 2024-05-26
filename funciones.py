@@ -16,7 +16,7 @@ def menu(menu_text, opciones):
         except ValueError:
             print("Error, ingrese un número válido.")
 
-def ingresar_datos(datos):
+def ingresar_datos():
     valido = False
     print("¿Desea agregar datos? Si: 1 | No: 2")
     
@@ -24,7 +24,7 @@ def ingresar_datos(datos):
         dato = {}
         agregar_datos = input("Ingrese el número de opción: ")
         if agregar_datos == "1":
-            ph = input("Ingrese el pH; ")
+            ph = input("Ingrese el pH: ")
             dato["pH"] = ph
             temperatura = input("Ingrese temperatura: ")
             dato["Temperatura"] = temperatura
@@ -35,15 +35,18 @@ def ingresar_datos(datos):
 
         elif agregar_datos == "2":
             print("Se añadiran datos por defecto.")
+            dato = {"pH": [0, 0, 0, 0, 0, 0, 0], "Temperatura": [0, 0, 0, 0, 0, 0, 0], "Humedad": [0, 0, 0, 0, 0, 0, 0]}
 
             valido = True
 
         else: 
-            print("Error, ingrese una opción válida")         
+            print("Error, ingrese una opción válida") 
+        
+        return dato   
 
 
 # Función para Crear un nuevo usuario
-def crear_usario(usuarios):
+def crear_usario(usuarios, datos):
     usuario_valido = False
     while usuario_valido == False:
         usuario = input("Ingrese nombre de usuario: ").upper()
@@ -59,11 +62,13 @@ def crear_usario(usuarios):
                 else:
                     print("Las contraseñas no coinciden, intente de nuevo")
             usuarios[usuario] = contraseña
+            añadir = ingresar_datos()
+            datos[usuario] = añadir
             print(f"Usuario {usuario} creado exitosamente")
             usuario_valido = True
 
 # Función para iniciar sesión en un usuario existente
-def ingresar(usuarios):
+def ingresar(usuarios, datos):
     ingreso = False
     while ingreso == False:
         usuario = input("Ingrese nombre de usuario: ").upper()
@@ -72,6 +77,7 @@ def ingresar(usuarios):
             if usuarios[usuario] == contraseña:
                 print("Inicio de sesión exitoso")
                 ingreso = True
+                return usuario
             else:
                 print("Contraseña incorrecta")
         else:
@@ -80,7 +86,7 @@ def ingresar(usuarios):
                 print("El usuario no existe")
                 opcion = input("¿Desea crear un nuevo usuario? (sí/no): ").lower()
                 if opcion == 'sí' or opcion == 'si':
-                    crear_usario(usuarios)
+                    crear_usario(usuarios, datos)
                     w = True
                     return usuario
                 else:
