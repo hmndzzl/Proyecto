@@ -52,7 +52,7 @@ datos = {
 # Menú 1: Inicio de Sesión
 opcion = f.menu(menu1, 2)
 
-if opcion == 1:
+if opcion == 1: # Reparar
     usuario = f.ingresar(usuarios)
     if not usuario:
         exit()

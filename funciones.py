@@ -72,6 +72,7 @@ def ingresar(usuarios):
             if usuarios[usuario] == contraseña:
                 print("Inicio de sesión exitoso")
                 ingreso = True
+                return True
             else:
                 print("Contraseña incorrecta")
         else:
@@ -87,9 +88,7 @@ def ingresar(usuarios):
                     print("Error, el programa terminará debido a que no se pudo validar el usuario.")
                     w = True
                 ingreso = True
-                    
-
-        
+                         
 
 # Función para obtener los datos en una semana completa 
 def obtener_datos_semanales(datos):
