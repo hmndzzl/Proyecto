@@ -1,4 +1,3 @@
-
 # Función que imprime un menú y recibe como argumentos el string con el menú y la cantidad de opciones que tiene le menú. 
 def menu(menu_text, opciones):
     while True:
@@ -16,6 +15,7 @@ def menu(menu_text, opciones):
         except ValueError:
             print("Error, ingrese un número válido.")
 
+#Función para ingresar datos a un usuario nuevo
 def ingresar_datos():
     valido = False
     print("¿Desea agregar datos? Si: 1 | No: 2")
@@ -58,8 +58,6 @@ def ingresar_datos():
             print("Error, ingrese una opción válida") 
 
     return dato
-
-
 
 # Función para Crear un nuevo usuario
 def crear_usario(usuarios, datos):
