@@ -12,7 +12,7 @@
 from datetime import datetime
 import copy as cp
 import pandas as pd 
-import funciones_prueba as f
+import funciones as f
 
 # Variables
 menu1 = """
